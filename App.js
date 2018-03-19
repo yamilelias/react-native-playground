@@ -1,11 +1,25 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
+import React, { Component } from 'react';
 import { AppLoading, Font } from 'expo';
-export default class App extends React.Component {
+import {
+  Root,
+  Container,
+  Content,
+  Footer,
+  FooterTab,
+  Button,
+  Text,
+  ActionSheet
+} from 'native-base';
+import AppHeader from './src/screens/Header';
 
-  constructor(){
-    super();
+const BUTTONS = ['Option 0', 'Option 1', 'Option 2', 'Delete', 'Cancel'];
+const DESTRUCTIVE_INDEX = 3;
+const CANCEL_INDEX = 4;
+
+export default class App extends Component {
+
+  constructor(props) {
+    super(props);
     this.state = {
       isReady: false,
     };
@@ -32,40 +46,39 @@ export default class App extends React.Component {
     }
 
     return (
-      <Container>
-        <Header>
-          <Left>
-            <Button transparent>
-              <Icon name='menu' />
+      <Root>
+        <Container padder>
+          <AppHeader/>
+          <Content padder>
+            <Text>
+              This is Content Section
+            </Text>
+            <Button
+              onPress={() =>
+                ActionSheet.show(
+                  {
+                    options: BUTTONS,
+                    cancelButtonIndex: CANCEL_INDEX,
+                    destructiveButtonIndex: DESTRUCTIVE_INDEX,
+                    title: 'Testing ActionSheet'
+                  },
+                  buttonIndex => {
+                    this.setState({ clicked: BUTTONS[buttonIndex] });
+                  }
+                )}
+            >
+              <Text>ActionSheet</Text>
             </Button>
-          </Left>
-          <Body>
-          <Title>Header</Title>
-          </Body>
-          <Right />
-        </Header>
-        <Content>
-          <Text>
-            This is Content Section
-          </Text>
-        </Content>
-        <Footer>
-          <FooterTab>
-            <Button full>
-              <Text>Footer</Text>
-            </Button>
-          </FooterTab>
-        </Footer>
-      </Container>
+          </Content>
+          <Footer>
+            <FooterTab>
+              <Button full>
+                <Text>Footer</Text>
+              </Button>
+            </FooterTab>
+          </Footer>
+        </Container>
+      </Root>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
