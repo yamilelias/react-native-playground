@@ -3,18 +3,10 @@ import { AppLoading, Font } from 'expo';
 import {
   Root,
   Container,
-  Content,
-  Footer,
-  FooterTab,
-  Button,
-  Text,
-  ActionSheet
 } from 'native-base';
 import AppHeader from './src/screens/Header';
-
-const BUTTONS = ['Option 0', 'Option 1', 'Option 2', 'Delete', 'Cancel'];
-const DESTRUCTIVE_INDEX = 3;
-const CANCEL_INDEX = 4;
+import AppFooter from './src/screens/Footer';
+import MainContent from './src/screens/Body';
 
 export default class App extends Component {
 
@@ -49,34 +41,8 @@ export default class App extends Component {
       <Root>
         <Container padder>
           <AppHeader/>
-          <Content padder>
-            <Text>
-              This is Content Section
-            </Text>
-            <Button
-              onPress={() =>
-                ActionSheet.show(
-                  {
-                    options: BUTTONS,
-                    cancelButtonIndex: CANCEL_INDEX,
-                    destructiveButtonIndex: DESTRUCTIVE_INDEX,
-                    title: 'Testing ActionSheet'
-                  },
-                  buttonIndex => {
-                    this.setState({ clicked: BUTTONS[buttonIndex] });
-                  }
-                )}
-            >
-              <Text>ActionSheet</Text>
-            </Button>
-          </Content>
-          <Footer>
-            <FooterTab>
-              <Button full>
-                <Text>Footer</Text>
-              </Button>
-            </FooterTab>
-          </Footer>
+          <MainContent/>
+          <AppFooter/>
         </Container>
       </Root>
     );
