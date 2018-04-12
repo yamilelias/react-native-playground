@@ -9,6 +9,7 @@ import {
   CardItem
 } from 'native-base';
 import Badges from './Badges';
+import Checklist from './Checklist';
 
 const BUTTONS = ['Option 0', 'Option 1', 'Option 2', 'Delete', 'Cancel'];
 const DESTRUCTIVE_INDEX = 3;
@@ -43,7 +44,16 @@ class MainContent extends Component {
             </Body>
           </CardItem>
         </Card>
-        <Badges/>
+        <Card>
+          <CardItem>
+            <Badges/>
+          </CardItem>
+        </Card>
+        <Card>
+          <CardItem>
+            <Checklist/>
+          </CardItem>
+        </Card>
       </Content>
     );
   }
